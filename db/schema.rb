@@ -10,9 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
-
+ActiveRecord::Schema.define(version: 2021_03_13_114141) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "accounts", force: :cascade do |t|
+    t.integer "balance", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.uuid "uuid", null: false
+    t.string "type", null: false
+    t.string "status"
+    t.string "auth_code"
+    t.integer "amount", null: false
+    t.bigint "account_id"
+    t.string "customer_email"
+    t.string "customer_phone"
+    t.string "notification_url"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_transactions_on_account_id"
+    t.index ["auth_code"], name: "index_transactions_on_auth_code"
+  end
+
+  add_foreign_key "transactions", "accounts"
 end
