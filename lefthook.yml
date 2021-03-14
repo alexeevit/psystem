@@ -1,6 +1,4 @@
 pre-commit:
   commands:
     standardrb:
-      files: git diff --name-only --staged
-      glob: "{*.rb,Gemfile}"
-      run: docker-compose run --rm runner standardrb {files}
+      run: docker-compose run --rm runner standardrb
