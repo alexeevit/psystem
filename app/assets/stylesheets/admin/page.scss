@@ -1,0 +1,15 @@
+.page {
+  &__header {
+    margin-bottom: 20px;
+
+    .page-header__actions {
+      a {
+        margin-right: 10px;
+
+        &:last-child {
+          margin-right: 0px;
+        }
+      }
+    }
+  }
+}

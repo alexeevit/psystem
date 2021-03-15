@@ -19,9 +19,11 @@ html
         .collapse.navbar-collapse#navbarNavDropdown
           ul.navbar-nav
             li.nav-item
-              a.nav-link href="/" Home
+              = link_to "Home", admin_root_path, class: "nav-link"
             li.nav-item
-              = link_to "Logout", admin_sign_out_path, method: :delete, class: "nav-link"
+              = link_to "Merchants", admin_merchants_path, class: "nav-link"
+            li.nav-item
+              = link_to "Logout", admin_sign_out_path, method: :delete, class: "nav-link text-danger"
 
       .container-fluid
         = yield
