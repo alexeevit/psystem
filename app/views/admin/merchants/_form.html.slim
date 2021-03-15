@@ -1,0 +1,28 @@
+= form_for [:admin, merchant] do |f|
+  - if merchant.errors.any?
+    .errors
+      - merchant.errors.each do |error|
+        .alert.alert-danger
+          strong
+            = error.attribute.capitalize
+          = " — #{error.message}"
+
+  .form-group
+    = f.label :status
+    = f.select :status, [["Active", "active"], ["Inactive", "inactive"]], {}, class: "form-control"
+  .form-group
+    = f.label :email
+    = f.email_field :email, class: "form-control"
+  .form-group
+    = f.label :password
+    = f.password_field :password, class: "form-control"
+    - unless merchant.new_record?
+      small.form-text.text-muted Leave empty if you don't want to change it
+  .form-group
+    = f.label :name
+    = f.text_field :name, class: "form-control"
+  .form-group
+    = f.label :description
+    = f.text_field :description, class: "form-control"
+
+  = f.submit "Submit", class: "btn btn-primary"
