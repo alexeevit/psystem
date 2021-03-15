@@ -13,3 +13,14 @@
  *= require_tree .
  *= require_self
  */
+
+.sign-in {
+  display: flex;
+  justify-content: center;
+
+  form {
+    padding: 35px;
+    width: 100%;
+    max-width: 500px;
+  }
+}

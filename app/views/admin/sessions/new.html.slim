@@ -1,0 +1,14 @@
+.sign-in
+  = form_tag admin_sign_in_path, method: :post do
+    legend Sign in
+
+    - if flash[:alert]
+      .alert.alert-danger role="alert"
+        = flash[:alert]
+    .form-group
+      = label_tag :email
+      = email_field_tag :email, "", class: "form-control"
+    .form-group
+      = label_tag :password
+      = password_field_tag :password, "", class: "form-control"
+    = submit_tag "Submit", class: "btn btn-primary"
