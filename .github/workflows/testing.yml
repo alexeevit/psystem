@@ -28,9 +28,17 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+      chrome:
+        image: browserless/chrome:1.31-chrome-stable
+        env:
+          PORT: 3333
+          CONNECTION_TIMEOUT: 600000
+        ports:
+          - "3333:3333"
     env:
       DATABASE_URL: postgres://postgres:postgres@localhost:5432/test
       RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+      CHROME_URL: http://chrome:3333
 
     steps:
     - uses: actions/checkout@v2
@@ -43,6 +51,7 @@ jobs:
         sudo apt-get -yqq install libpq-dev
         bundle install --jobs 4 --retry 3
         bundle exec rails db:prepare
+        yarn install
     - name: Lint
       run: bundle exec standardrb
     - name: Test
