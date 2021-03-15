@@ -2,7 +2,8 @@ require "rails_helper"
 
 describe User, type: :model do
   describe "Validations" do
-    subject(:user) { build(:admin) }
+    subject(:user) { build(:admin, email: email) }
+    let(:email) { "user@example.com" }
 
     describe "#email" do
       it "is required" do
@@ -13,6 +14,12 @@ describe User, type: :model do
 
       it "matches email mask" do
         user.email = "random"
+        expect(user).to be_invalid
+        expect(user.errors[:email].size).to eq(1)
+      end
+
+      it "is unique" do
+        create(:admin, email: email)
         expect(user).to be_invalid
         expect(user.errors[:email].size).to eq(1)
       end

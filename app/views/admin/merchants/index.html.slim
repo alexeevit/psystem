@@ -1,0 +1,27 @@
+.page
+  .page__header
+    h1 Merchants
+    .page-header__actions
+      = link_to "New", new_admin_merchant_path, class: "btn btn-primary"
+
+  .page__content
+    table.table
+      thead
+        tr
+          th #
+          th Status
+          th Name
+          th Email
+          th Created At
+          th Actions
+      tbody
+        - @merchants.each do |merchant|
+          tr
+            td.id = link_to merchant.id, admin_merchant_path(merchant)
+            td.status = String(merchant.status).capitalize
+            td.name = merchant.name
+            td.email = merchant.email
+            td.created_at = l merchant.created_at, format: "%H:%M %m/%d/%y"
+            td.actions
+              = link_to "Edit", edit_admin_merchant_path(merchant), class: "btn btn-secondary"
+              = link_to "Delete", admin_merchant_path(merchant), method: :delete, data: { confirm: "Are you sure you want to delete this?" }, class: "btn btn-danger"

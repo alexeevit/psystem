@@ -8,6 +8,7 @@ FactoryBot.define do
   end
 
   factory :merchant do
+    status { :active }
     email { generate(:merchant_email) }
     password { "password" }
     name { "Mike" }

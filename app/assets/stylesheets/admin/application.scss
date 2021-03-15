@@ -1,0 +1,26 @@
+/*
+ *= require admin/page
+ */
+
+.sign-in {
+  display: flex;
+  justify-content: center;
+
+  form {
+    padding: 35px;
+    width: 100%;
+    max-width: 500px;
+  }
+}
+
+.table {
+  .actions {
+    .btn {
+      margin-right: 5px;
+
+      &:last-child {
+        margin-right: 0px;
+      }
+    }
+  }
+}
