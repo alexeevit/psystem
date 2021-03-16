@@ -9,7 +9,7 @@ describe "Transactions", :js, type: :feature do
 
   describe "Index page" do
     before do
-      2.times do
+      3.times do
         create(:authorize,
           status: "pending",
           notification_url: "https://google.com/psystem_webhook",

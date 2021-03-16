@@ -4,7 +4,7 @@ describe "Merchants management", :js, type: :feature do
   before do
     sign_in admin.email, "password"
 
-    2.times do
+    3.times do
       create(:merchant)
     end
   end
@@ -83,11 +83,6 @@ describe "Merchants management", :js, type: :feature do
   end
 
   describe "Deletion" do
-    before do
-      first_merchant.account.transactions.destroy_all
-      first_merchant.account.destroy
-    end
-
     it "deletes a merchant and redirects to index page" do
       visit admin_merchants_path
       actions = page.first("table.table tbody tr td.actions")
