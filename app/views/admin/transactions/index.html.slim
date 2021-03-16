@@ -1,0 +1,37 @@
+.page
+  .page__header
+    h1 Transactions
+
+  .page__content
+    table.table
+      thead
+        tr
+          th ID
+          th Type
+          th Status
+          th Amount
+          th Extra
+      tbody
+        - @transactions.each do |transaction|
+          tr
+            td.id = transaction.id
+            td.type = transaction.type_name
+            td.status = transaction.status
+            td.amount = transaction.amount
+            td.extra
+              strong UUID: 
+              = transaction.uuid
+              br
+              strong Auth code: 
+              = transaction.auth_code
+              br
+              - if transaction.class == Transactions::Authorize
+                strong Notification URL: 
+                = transaction.notification_url
+                br
+              strong Customer Email: 
+              = transaction.customer_email
+              br
+              strong Customer Phone: 
+              = transaction.customer_phone
+              br

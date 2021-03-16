@@ -3,4 +3,8 @@ class Transaction < ApplicationRecord
   validates :amount, presence: true, numericality: {greater_than: 0}
 
   belongs_to :account
+
+  def type_name
+    raise NotImplementedError
+  end
 end

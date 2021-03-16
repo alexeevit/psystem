@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe Transaction, type: :model do
   describe "Validations" do
-    subject(:transaction) { build(:transaction) }
+    subject(:transaction) { build(:authorize) }
 
     describe "#uuid" do
       it "is required" do
