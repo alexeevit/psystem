@@ -1,4 +1,6 @@
 class CreateAuthorizeTransactionService < ApplicationService
+  include CommonValidations
+
   attr_reader :account, :params, :errors
 
   def initialize(account, params)
@@ -40,15 +42,6 @@ class CreateAuthorizeTransactionService < ApplicationService
     validate_customer_email
   end
 
-  def validate_amount
-    (errors[:amount] = ["is blank"]) && return if params[:amount].blank?
-
-    amount = Integer(params[:amount])
-    (errors[:amount] = ["is not positive"]) && return if amount <= 0
-  rescue TypeError, ArgumentError
-    errors[:amount] = ["has non-integer value"]
-  end
-
   def validate_notification_url
     url = URI.parse(String(params[:notification_url]))
     (errors[:notification_url] = ["is blank"]) && return if url.host.blank?
@@ -62,11 +55,5 @@ class CreateAuthorizeTransactionService < ApplicationService
 
     (errors[:customer_email] = ["is blank"]) && return if email.blank?
     errors[:customer_email] = ["is invalid email"] unless email.match?(URI::MailTo::EMAIL_REGEXP)
-  end
-
-  def clean_invalid_params
-    errors.keys.each do |key|
-      params.delete(key)
-    end
   end
 end
