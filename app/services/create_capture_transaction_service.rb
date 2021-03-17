@@ -35,7 +35,7 @@ class CreateCaptureTransactionService < ApplicationService
   private
 
   def permitted_params
-    params.slice(:amount, :notification_url, :customer_email, :customer_phone)
+    params.slice(:amount)
   end
 
   def validate_params
