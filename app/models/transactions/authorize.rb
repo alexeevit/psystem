@@ -1,7 +1,5 @@
 module Transactions
   class Authorize < ::Transaction
-    def type_name
-      "authorize".freeze
-    end
+    enum status: [:pending, :approved, :captured, :error]
   end
 end
