@@ -1,7 +1,11 @@
 module Transactions
   class Capture < ::Transaction
-    def type_name
-      "capture".freeze
+    enum status: [:error, :approved, :refunded]
+
+    scope :successful, -> { where.not(status: :error) }
+
+    def make_refunded!
+      update!(status: :refunded)
     end
   end
 end

@@ -1,7 +1,7 @@
 module Transactions
   class Refund < ::Transaction
-    def type_name
-      "refund".freeze
-    end
+    enum status: [:error, :approved]
+
+    scope :successful, -> { where.not(status: :error) }
   end
 end

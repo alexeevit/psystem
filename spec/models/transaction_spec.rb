@@ -12,17 +12,11 @@ describe Transaction, type: :model do
       end
     end
 
-    describe "#amount" do
+    describe "#unique_id" do
       it "is required" do
-        transaction.amount = nil
+        transaction.unique_id = nil
         expect(transaction).to be_invalid
-        expect(transaction.errors[:amount].size).to be > 1
-      end
-
-      it "is greater than zero" do
-        transaction.amount = 0
-        expect(transaction).to be_invalid
-        expect(transaction.errors[:amount].size).to eq(1)
+        expect(transaction.errors[:unique_id].size).to eq(1)
       end
     end
   end

@@ -1,7 +1,5 @@
 module Transactions
   class Void < ::Transaction
-    def type_name
-      "void".freeze
-    end
+    enum status: [:error, :approved]
   end
 end

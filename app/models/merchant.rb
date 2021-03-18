@@ -1,5 +1,5 @@
 class Merchant < User
-  enum status: {active: "active", inactive: "inactive"}
+  enum status: [:inactive, :active]
   has_one :account
 
   validates :status, presence: true, inclusion: {in: ["active", "inactive"]}
