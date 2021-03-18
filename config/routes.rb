@@ -10,4 +10,12 @@ Rails.application.routes.draw do
 
     root to: "static#index"
   end
+
+  scope :api do
+    api_guard_routes for: "merchants", only: ["authentication"]
+  end
+
+  namespace :api do
+    resources :transactions, only: [:index]
+  end
 end
