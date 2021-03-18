@@ -28,7 +28,7 @@ class CreateTransactionService < ApplicationService
 
   def create_authorize_transaction(account, params)
     transaction = CreateAuthorizeTransactionService.call(account, params)
-    ProcessAuthorizeTransactionJob.perform_later(transaction: transaction)
+    ProcessAuthorizeTransactionJob.perform_later(transaction)
     transaction
   end
 

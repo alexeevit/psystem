@@ -1,6 +1,8 @@
 require "rails_helper"
 
 describe CreateTransactionService do
+  before { ActiveJob::Base.queue_adapter = :test }
+
   let(:type) { :authorize }
   let(:account) { create(:account) }
   let(:authorize) { create(:authorize, account: account) }
@@ -61,8 +63,8 @@ describe CreateTransactionService do
 
     context "when authorize transaction" do
       it "creates transaction, schedules to process it, and returns it" do
-        expect(ProcessAuthorizeTransactionJob).to receive(:perform_later)
         expect(service.call).to be_instance_of(Transactions::Authorize)
+        expect(ProcessAuthorizeTransactionJob).to have_been_enqueued
       end
     end
 
