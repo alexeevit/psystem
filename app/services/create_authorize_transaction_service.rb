@@ -25,8 +25,6 @@ class CreateAuthorizeTransactionService < ApplicationService
       raise Transactions::ValidationError, errors
     end
 
-    ProcessAuthorizeTransactionJob.perform_later(transaction: transaction)
-
     transaction
   end
 

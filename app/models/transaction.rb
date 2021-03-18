@@ -6,7 +6,7 @@ class Transaction < ApplicationRecord
 
   class << self
     def type_by_name(name)
-      Transactions::TypeNames::TYPES[name]
+      Transactions::TypeNames::TYPES[name.to_sym]
     end
 
     def name_by_type(type)

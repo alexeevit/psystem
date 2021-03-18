@@ -24,11 +24,6 @@ describe CreateAuthorizeTransactionService do
           expect(new_transaction.unique_id).to be_instance_of(String)
         }.to change(Transactions::Authorize, :count).by(1)
       end
-
-      it "schedules a job to process the transaction" do
-        expect(ProcessAuthorizeTransactionJob).to receive(:perform_later)
-        service.call
-      end
     end
 
     context "when some params are invalid" do

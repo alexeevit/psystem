@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory :authorize, class: "Transactions::Authorize" do
+    status { :approved }
     unique_id { SecureRandom.uuid }
     uuid { SecureRandom.uuid }
     amount { 100 }
@@ -7,6 +8,7 @@ FactoryBot.define do
   end
 
   factory :capture, class: "Transactions::Capture" do
+    status { :approved }
     unique_id { SecureRandom.uuid }
     uuid { SecureRandom.uuid }
     amount { 100 }
@@ -14,6 +16,7 @@ FactoryBot.define do
   end
 
   factory :refund, class: "Transactions::Refund" do
+    status { :approved }
     unique_id { SecureRandom.uuid }
     uuid { SecureRandom.uuid }
     amount { 100 }
@@ -21,6 +24,7 @@ FactoryBot.define do
   end
 
   factory :void, class: "Transactions::Void" do
+    status { :approved }
     unique_id { SecureRandom.uuid }
     uuid { SecureRandom.uuid }
     amount { 100 }
