@@ -24,6 +24,7 @@ gem "bcrypt", "~> 3.1.7"
 gem "slim"
 gem "sidekiq"
 gem "faraday"
+gem "api_guard"
 
 group :development, :test do
   # Call "byebug" anywhere in the code to stop execution and get a debugger console

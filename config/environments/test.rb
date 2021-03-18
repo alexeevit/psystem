@@ -50,4 +50,5 @@ Rails.application.configure do
 
   app_host = ENV.fetch("APP_HOST", `hostname`.strip&.downcase)
   config.hosts << app_host if app_host
+  config.hosts << "example.org" # for rack-test
 end
