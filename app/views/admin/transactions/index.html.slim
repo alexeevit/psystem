@@ -22,8 +22,8 @@
               strong UUID: 
               = transaction.uuid
               br
-              strong Auth code: 
-              = transaction.auth_code
+              strong Unique ID: 
+              = transaction.unique_id
               br
               - if transaction.class == Transactions::Authorize
                 strong Notification URL: 

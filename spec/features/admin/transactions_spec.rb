@@ -32,7 +32,7 @@ describe "Transactions", :js, type: :feature do
       expect(first_row.find("td.amount")).to have_text(transaction.amount)
       expect(first_row.find("td.extra")).to have_text(<<-TEXT.squish)
         UUID: #{transaction.uuid}
-        Auth code: #{transaction.auth_code}
+        Unique ID: #{transaction.unique_id}
         Notification URL: #{transaction.notification_url}
         Customer Email: #{transaction.customer_email}
         Customer Phone: #{transaction.customer_phone}
