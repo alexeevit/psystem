@@ -1,6 +1,10 @@
 require "rails_helper"
 
 describe "Authentication", type: :api do
+  before do
+    ActiveJob::Base.queue_adapter = :test
+  end
+
   let!(:merchant) { create(:merchant, email: email, password: password, account: create(:account)) }
   let(:email) { "merchant@example.com" }
   let(:password) { "password" }
