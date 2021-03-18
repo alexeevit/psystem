@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_17_160058) do
+ActiveRecord::Schema.define(version: 2021_03_18_181636) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,9 @@ ActiveRecord::Schema.define(version: 2021_03_17_160058) do
     t.uuid "unique_id", null: false
     t.integer "status", null: false
     t.json "validation_errors"
+    t.integer "notification"
+    t.datetime "last_notification_at"
+    t.integer "notification_attempts", default: 0
     t.index ["account_id"], name: "index_transactions_on_account_id"
     t.index ["uuid"], name: "index_transactions_on_uuid"
   end

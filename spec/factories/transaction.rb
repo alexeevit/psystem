@@ -4,6 +4,7 @@ FactoryBot.define do
     unique_id { SecureRandom.uuid }
     uuid { SecureRandom.uuid }
     amount { 100 }
+    notification { :pending }
     account
   end
 
