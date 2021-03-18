@@ -19,7 +19,7 @@ class CreateTransactionService < ApplicationService
     return create_authorize_transaction(account, params) if authorize?
 
     authorize_transaction = Transactions::Authorize.find_by(unique_id: params.fetch(:unique_id), account_id: account.id)
-    raise ArgumentError, "Invalid unique_id" unless authorize_transaction
+    raise Transactions::AuthorizeNotFoundError unless authorize_transaction
 
     create_related_transaction(authorize_transaction, params)
   end

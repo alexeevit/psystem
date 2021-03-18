@@ -122,7 +122,7 @@ describe CreateTransactionService do
       end
 
       it "raises ArgumentError" do
-        expect { service.call }.to raise_error(ArgumentError, "Invalid unique_id")
+        expect { service.call }.to raise_error(Transactions::AuthorizeNotFoundError)
       end
     end
   end

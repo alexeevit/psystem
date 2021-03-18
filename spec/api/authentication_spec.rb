@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe "Authentication", type: :api do
-  let!(:merchant) { create(:merchant, email: email, password: password) }
+  let!(:merchant) { create(:merchant, email: email, password: password, account: create(:account)) }
   let(:email) { "merchant@example.com" }
   let(:password) { "password" }
 
@@ -40,10 +40,9 @@ describe "Authentication", type: :api do
     end
   end
 
-  def post_with_json(uri, data, token = nil)
+  def post_with_json(uri, data)
     json = JSON.generate(data)
     headers = {"CONTENT_TYPE" => "application/json"}
-    headers["AUTHORIZATION"] = "Bearer #{token}" if token
     post(uri, json, headers)
   end
 end

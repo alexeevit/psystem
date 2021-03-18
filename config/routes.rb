@@ -16,6 +16,6 @@ Rails.application.routes.draw do
   end
 
   namespace :api do
-    resources :transactions, only: [:index]
+    resources :transactions, only: [:index, :create]
   end
 end

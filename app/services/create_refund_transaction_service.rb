@@ -44,6 +44,7 @@ class CreateRefundTransactionService < ApplicationService
   end
 
   def validate_refunded_amount
+    return if errors[:amount]
     captured_amount = authorize.capture_transactions.successful.sum(:amount)
     refunded_amount = authorize.refund_transactions.successful.sum(:amount) + Integer(params[:amount])
 

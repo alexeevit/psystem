@@ -49,6 +49,7 @@ class CreateCaptureTransactionService < ApplicationService
   end
 
   def validate_captured_amount
+    return if errors[:amount]
     is_greater = authorize.capture_transactions.successful.sum(:amount) + Integer(params[:amount]) > authorize.amount
 
     if is_greater
