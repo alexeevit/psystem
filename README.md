@@ -31,11 +31,11 @@ docker-compose up rails sidekiq
 
 There's a Postman collection [here](docs/postman_collection.json)
 
-Don't forget to use the value from the Access-Token header after authentication request. Put is to the Authorize header for further requests.
+Don't forget to use the value from the Access-Token header after authentication request. Put it to the Authorize header for further requests.
 
 ## Tests
 
-Run `rspec_features` container once before to setup browser for feature specs
+When you ran tests for the first time run and kill the `rspec_features` container to setup browser for feature tests
 ```
 docker-compose up rspec_features
 ```
