@@ -2,26 +2,44 @@ require "rails_helper"
 
 describe "Api::Transactions", type: :api do
   let!(:merchant) { create(:merchant, status: merchant_status, account: create(:account)) }
+  let(:merchant_status) { :active }
   let(:token) { jwt_and_refresh_token(merchant, "merchant").first }
 
   before { header "Authorization", "Bearer #{token}" }
 
   describe "GET /api/transactions" do
     let!(:transaction) { create(:authorize, account: merchant.account, amount: 100) }
-    let(:merchant_status) { :active }
 
-    it "returns all transactions" do
-      get "/api/transactions.json"
-      expect(json_response).to eq([
-        {
-          "amount" => 100,
-          "customer_email" => nil,
-          "customer_phone" => nil,
-          "notification_url" => nil,
-          "status" => "approved",
-          "unique_id" => transaction.unique_id
-        }
-      ])
+    context "when json request" do
+      it "returns all transactions" do
+        get "/api/transactions.json"
+        expect(json_response).to eq([
+          {
+            "amount" => 100,
+            "customer_email" => nil,
+            "customer_phone" => nil,
+            "notification_url" => nil,
+            "status" => "approved",
+            "unique_id" => transaction.unique_id
+          }
+        ])
+      end
+    end
+
+    context "when xml request" do
+      it "returns all transactions" do
+        get "/api/transactions.xml"
+        expect(xml_response).to eq([
+          {
+            "amount" => 100,
+            "customer_email" => nil,
+            "customer_phone" => nil,
+            "notification_url" => nil,
+            "status" => "approved",
+            "unique_id" => transaction.unique_id
+          }
+        ])
+      end
     end
   end
 
@@ -37,8 +55,6 @@ describe "Api::Transactions", type: :api do
     end
 
     context "when merchant is active" do
-      let(:merchant_status) { :active }
-
       context "when authorized transaction" do
         let(:params) do
           {
@@ -302,6 +318,33 @@ describe "Api::Transactions", type: :api do
         end
       end
     end
+
+    context "when xml format" do
+      let(:merchant_status) { :active }
+      let(:params) do
+        {
+          type: :authorize,
+          amount: 100,
+          notification_url: "https://google.com/psystem_webhook",
+          customer_email: "johnbowie@gmail.com"
+        }
+      end
+
+      it "creates transaction and returns it if all params are valid" do
+        post_with_xml "/api/transactions.xml", params
+
+        transaction = Transactions::Authorize.last
+        expect(last_response).to be_successful
+        expect(xml_response).to include({
+          "unique_id" => transaction.unique_id,
+          "status" => "pending",
+          "amount" => 100,
+          "notification_url" => "https://google.com/psystem_webhook",
+          "customer_email" => "johnbowie@gmail.com",
+          "customer_phone" => nil
+        })
+      end
+    end
   end
 
   def post_with_json(uri, data)
@@ -310,7 +353,18 @@ describe "Api::Transactions", type: :api do
     post(uri, json, headers)
   end
 
+  def post_with_xml(uri, data)
+    xml = data.stringify_keys.map { |k, v| [k, v.is_a?(Symbol) ? String(v) : v] }.to_h.to_xml
+    headers = {"CONTENT_TYPE" => "application/xml"}
+    post(uri, xml, headers)
+  end
+
   def json_response
     JSON.parse(last_response.body)
+  end
+
+  def xml_response
+    xml = Hash.from_xml(last_response.body)
+    xml.dig("hash") || xml.dig("objects")
   end
 end
