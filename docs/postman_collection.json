@@ -1,0 +1,157 @@
+{
+	"info": {
+		"_postman_id": "38ee355e-f1b0-49a0-8f38-8e33f5a9ceba",
+		"name": "PSystem",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Transactions",
+			"item": [
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{psystem_uri}}/api/transactions"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Authorize transaction",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"authorize\",\n    \"amount\": 100,\n    \"notification_url\": \"https://localhost/psystem_webhook\",\n    \"customer_email\": \"customer@example.com\",\n    \"customer_phone\": \"+79999999999\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{psystem_uri}}/api/transactions"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Capture transaction",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"capture\",\n    \"unique_id\": \"{{unique_id}}\",\n    \"amount\": 100\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{psystem_uri}}/api/transactions"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Refund transaction",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"refund\",\n    \"unique_id\": \"{{unique_id}}\",\n    \"amount\": 100\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{psystem_uri}}/api/transactions"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Void transaction",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"void\",\n    \"unique_id\": \"{{unique_id}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{psystem_uri}}/api/transactions"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Authenticate merchant",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"{{merchant_email}}\",\n    \"password\": \"{{merchant_password}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{psystem_uri}}/api/merchants/sign_in"
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": {
+			"token": ""
+		}
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "psystem_uri",
+			"value": "http://localhost:3000"
+		},
+		{
+			"key": "merchant_email",
+			"value": "merchant@example.com"
+		},
+		{
+			"key": "merchant_password",
+			"value": "password"
+		},
+		{
+			"key": "unique_id",
+			"value": ""
+		}
+	]
+}
