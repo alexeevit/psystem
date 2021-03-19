@@ -1,6 +1,6 @@
 class Api::TransactionsController < Api::ApplicationController
   def index
-    presenters = current_merchant.account.transactions.map { |transaction| TransactionPresenter.new(transaction) }
+    presenters = current_merchant.account.transactions.order(created_at: :desc).map { |transaction| TransactionPresenter.new(transaction) }
 
     respond_to do |format|
       format.json { render json: ApplicationPresenter.as_json(presenters) }

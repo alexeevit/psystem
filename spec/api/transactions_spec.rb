@@ -5,7 +5,12 @@ describe "Api::Transactions", type: :api do
   let(:merchant_status) { :active }
   let(:token) { jwt_and_refresh_token(merchant, "merchant").first }
 
-  before { header "Authorization", "Bearer #{token}" }
+  before do
+    Timecop.freeze(DateTime.new(2021, 1, 1, 9, 30, 0))
+    header "Authorization", "Bearer #{token}"
+  end
+
+  after { Timecop.return }
 
   describe "GET /api/transactions" do
     let!(:transaction) { create(:authorize, account: merchant.account, amount: 100) }
@@ -16,10 +21,12 @@ describe "Api::Transactions", type: :api do
         expect(json_response).to eq([
           {
             "amount" => 100,
+            "created_at" => 1609493400,
             "customer_email" => nil,
             "customer_phone" => nil,
             "notification_url" => nil,
             "status" => "approved",
+            "type" => "authorize",
             "unique_id" => transaction.unique_id
           }
         ])
@@ -32,10 +39,12 @@ describe "Api::Transactions", type: :api do
         expect(xml_response).to eq([
           {
             "amount" => 100,
+            "created_at" => 1609493400,
             "customer_email" => nil,
             "customer_phone" => nil,
             "notification_url" => nil,
             "status" => "approved",
+            "type" => "authorize",
             "unique_id" => transaction.unique_id
           }
         ])

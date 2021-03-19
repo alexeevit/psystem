@@ -40,7 +40,7 @@ describe CreateAuthorizeTransactionService do
           expect(new_transaction.uuid).to be_instance_of(String)
           expect(new_transaction.unique_id).to be_instance_of(String)
         }.to change(Transactions::Authorize, :count).by(1)
-          .and raise_error(Transactions::ValidationError, "Some parameters are invalid")
+          .and raise_error(Transactions::ValidationError)
       end
     end
   end
