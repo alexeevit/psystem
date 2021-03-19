@@ -35,7 +35,8 @@ class Admin::MerchantsController < Admin::ApplicationController
 
   def destroy
     if !@merchant.destroy
-      flash[:alert] = @merchant.errors.to_sentence
+      flash[:alert] = @merchant.errors.full_messages.to_sentence
+      flash[:alert] = @merchant.account.errors.full_messages.to_sentence
     end
 
     redirect_to admin_merchants_path

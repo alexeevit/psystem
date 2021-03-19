@@ -2,6 +2,10 @@
  *= require admin/page
  */
 
+.window {
+  position: relative;
+}
+
 .sign-in {
   display: flex;
   justify-content: center;

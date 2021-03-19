@@ -12,4 +12,28 @@ describe Merchant, type: :model do
       end
     end
   end
+
+  describe "Callbacks" do
+    subject!(:merchant) { create(:merchant) }
+
+    describe "#check_transactions" do
+      context "when there no transactions" do
+        it "allows to destroy merchant" do
+          expect {
+            merchant.destroy
+          }.to change(Merchant, :count).by(-1)
+        end
+      end
+
+      context "when there are transactions" do
+        before { create(:authorize, account: merchant.account) }
+
+        it "does not allow to destroy merchant" do
+          expect {
+            merchant.destroy
+          }.not_to change(Merchant, :count)
+        end
+      end
+    end
+  end
 end

@@ -10,6 +10,8 @@ class Admin::ApplicationController < ApplicationController
     if session[:user_id]
       @admin ||= User.find(session[:user_id])
     end
+  rescue ActiveRecord::RecordNotFound
+    destroy_session
   end
 
   def signed_in?
