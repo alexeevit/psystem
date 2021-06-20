@@ -66,6 +66,7 @@ RSpec.configure do |config|
   config.include ApiGuard::Test::ControllerHelper
   config.include Rack::Test::Methods, type: :api
   config.include ApiHelpers, type: :api
+  config.include FeatureHelpers, type: :feature
 
   def app
     Psystem::Application

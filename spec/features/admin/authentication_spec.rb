@@ -43,12 +43,4 @@ describe "Authentication", :js, type: :feature do
       expect(current_path).to eq("/admin/sign_in")
     end
   end
-
-  def sign_in(email, password)
-    visit "/admin/sign_in"
-
-    fill_in :email, with: email
-    fill_in :password, with: password
-    click_button "Submit"
-  end
 end
