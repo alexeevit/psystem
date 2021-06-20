@@ -7,6 +7,6 @@ module Transactions
       void: Transactions::Void
     }.freeze
 
-    TYPE_NAMES = Hash[TYPES.to_a.map(&:reverse)].freeze
+    TYPE_NAMES = TYPES.to_a.map(&:reverse).to_h.freeze
   end
 end
