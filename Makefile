@@ -4,6 +4,9 @@ ROOT_DIR = $(shell pwd)
 
 install: build_docker bundle_install yarn_install setup_database setup_test_database echo_help
 
+up:
+	docker-compose up rails sidekiq
+
 rspec:
 	docker-compose run --rm runner bin/rspec --exclude-pattern spec/features/*/**/*_spec.rb
 

@@ -6,10 +6,10 @@ A prototype of a payment system
 
 That's a quite simple prototype of a payment system with 4 different types of transactions.
 
-- Authorize: hold the money on the customer's account (we mock calls to customer's bank, take a look at ProcessAuthorizeTransactionService)
-- Capture: move authorized money from the customer's account to the merchant's account
-- Refund: move captured money back from the merchant's account to the customer's account
-- Void: invalidate an auhtorize transaction
+- `Authorize` — hold the money on the customer's account (we mock calls to customer's bank, take a look at ProcessAuthorizeTransactionService)
+- `Capture` — move authorized money from the customer's account to the merchant's account
+- `Refund` — move captured money back from the merchant's account to the customer's account
+- `Void` — invalidate an auhtorize transaction
 
 For now we have web interface at: /admin (use seeds or create an instance of Admin)
 
@@ -24,7 +24,7 @@ make install
 
 And then you're able to run the app:
 ```
-docker-compose up rails sidekiq
+make up
 ```
 
 ## API docs
