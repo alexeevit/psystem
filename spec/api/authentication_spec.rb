@@ -43,10 +43,4 @@ describe "Authentication", type: :api do
       expect(last_response.status).to eq(401)
     end
   end
-
-  def post_with_json(uri, data)
-    json = JSON.generate(data)
-    headers = {"CONTENT_TYPE" => "application/json"}
-    post(uri, json, headers)
-  end
 end
