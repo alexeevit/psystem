@@ -35,12 +35,17 @@ Don't forget to use the value from the Access-Token header after authentication 
 
 ## Tests
 
-When you ran tests for the first time run and kill the `rspec_features` container to setup browser for feature tests
+Use the next command to run usual rspec tests
 ```
-docker-compose up rspec_features
+make rspec
 ```
 
-Use `runner` service to run some usual stuff like
+Use the next command to run feature tests
 ```
-docker-compose run runner bin/rspec
+make rspec_features
+```
+
+Use the service `runner` to run some development stuff like
+```
+docker-compose run runner bundle install
 ```

@@ -4,6 +4,12 @@ ROOT_DIR = $(shell pwd)
 
 install: build_docker bundle_install yarn_install setup_database setup_test_database echo_help
 
+rspec:
+	docker-compose run --rm runner bin/rspec --exclude-pattern spec/features/*/**/*_spec.rb
+
+rspec_features:
+	docker-compose run --rm rspec_features bin/rspec --pattern spec/features/*/**/*_spec.rb
+
 build_docker:
 	docker-compose build; \
 	echo "Docker images was successfully built" \
