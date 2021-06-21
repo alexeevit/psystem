@@ -13,6 +13,10 @@ That's a quite simple prototype of a payment system with 4 different types of tr
 
 For now we have web interface at: /admin (use seeds or create an instance of Admin)
 
+## Demo
+
+The demo instance is deployed on heroku: [psystem-dev.herokuapp.com](https://psystem-dev.herokuapp.com/)
+
 ## Quick setup
 
 We have a script for quick local deployment.
