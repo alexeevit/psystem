@@ -18,4 +18,6 @@ Rails.application.routes.draw do
   namespace :api do
     resources :transactions, only: [:index, :create]
   end
+
+  root to: "static#index"
 end
